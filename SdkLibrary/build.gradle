@@ -1,23 +1,20 @@
-apply plugin: 'com.android.library'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-    }
-}
+plugins { id 'com.android.library' version '8.2.1' }
+repositories { google(); mavenCentral() }
 
 dependencies {
+    compileOnly 'androidx.annotation:annotation:1.7.1'
+    compileOnly 'androidx.fragment:fragment:1.5.7'
+    compileOnly 'androidx.appcompat:appcompat:1.6.1'
     compileOnly files('libs/android-26.jar')
     compileOnly files('libs/android-support-26.1.0.jar')
 }
 
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+    namespace 'org.qiyi.pluginlibrary'
+    buildFeatures { aidl true }
+    compileSdk 34
+
     lintOptions {
         abortOnError false
     }
@@ -34,12 +31,8 @@ android {
         }
     }
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion TARGET_SDK_VERSION
-    }
-    dexOptions {
-        javaMaxHeapSize "2g"
-        jumboMode true
+        minSdk 14
+        targetSdk 34
     }
     packagingOptions {
         exclude('META-INF/DEPENDENCIES')
@@ -54,32 +47,3 @@ android {
     }
 }
 
-import groovy.xml.XmlUtil
-// 调整Android SDK的依赖顺序，放到SdkLibrary.iml文件的最后面
-preBuild.doLast {
-    def imlFile = file(project.name + ".iml")
-    println "Change ${project.name} .iml orderEntry"
-    try {
-        def parsedXml = (new XmlParser()).parse(imlFile)
-        def jdkNode = parsedXml.component[1].orderEntry.find {
-            it.'@type' == 'jdk'
-        }
-        parsedXml.component[1].remove(jdkNode)
-        def sdkver = "Android API " + android.compileSdkVersion.substring("android-".length())  + " Platform"
-        new Node(parsedXml.component[1], 'orderEntry', ['type': 'jdk', 'jdkName': sdkver, 'jdkType': 'Android SDK'])
-        XmlUtil.serialize(parsedXml, new FileOutputStream(imlFile))
-
-        println "Modify ${project.name} ${imlFile} success"
-    } catch (FileNotFoundException e) {
-        // nop, iml not found
-        e.printStackTrace()
-    }
-}
-// 依赖本地的android-26.jar
-gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs.add('-Xbootclasspath/p:libs/android-26.jar')
-    }
-}
-
-apply from: "release.gradle"

@@ -1,10 +1,10 @@
-package com.iqiyi.plugin.sample;
+﻿package com.iqiyi.plugin.sample;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 
 import com.facebook.common.logging.FLog;
@@ -53,3 +53,4 @@ public class MainActivity extends AppCompatActivity{
         Log.i(TAG, "MainActivity onResume() called");
     }
 }
+

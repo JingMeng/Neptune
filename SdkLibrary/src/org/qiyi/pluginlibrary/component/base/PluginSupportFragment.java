@@ -19,10 +19,10 @@ package org.qiyi.pluginlibrary.component.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentHostCallback;
-import android.support.v4.app.PluginFragmentHostCallback;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentHostCallback;
+import androidx.fragment.app.PluginFragmentHostCallback;
 import android.text.TextUtils;
 
 import org.qiyi.pluginlibrary.component.wraper.ActivityWrapper;

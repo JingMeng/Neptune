@@ -19,8 +19,8 @@ package org.qiyi.pluginlibrary.utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -29,7 +29,7 @@ import org.qiyi.pluginlibrary.component.base.PluginSupportFragment;
 import java.util.ArrayList;
 
 /**
- * Fragment 插件的 Helper，辅助一些 OnSaveInstanceState 的操作，防止进程被回收以后恢复过程中的 ClassNotFound.
+ * Fragment 鎻掍欢鐨?Helper锛岃緟鍔╀竴浜?OnSaveInstanceState 鐨勬搷浣滐紝闃叉杩涚▼琚洖鏀朵互鍚庢仮澶嶈繃绋嬩腑鐨?ClassNotFound.
  */
 public class FragmentPluginHelper {
     private FragmentManager mFragmentManager;
@@ -43,18 +43,18 @@ public class FragmentPluginHelper {
     }
 
     /**
-     * 取消 View 以及其 children View 的 onSaveInstanceState 调用
+     * 鍙栨秷 View 浠ュ強鍏?children View 鐨?onSaveInstanceState 璋冪敤
      * <p>
-     * 耗时大约 1ms
+     * 鑰楁椂澶х害 1ms
      *
-     * @param view 顶层 view
+     * @param view 椤跺眰 view
      */
     public static void disableViewSaveInstanceRecursively(View view) {
         ViewPluginHelper.disableViewSaveInstanceRecursively(view);
     }
 
     /**
-     * 过滤掉插件 Fragment，插件 Fragment 不会被保存到 savedInstanceState 中.
+     * 杩囨护鎺夋彃浠?Fragment锛屾彃浠?Fragment 涓嶄細琚繚瀛樺埌 savedInstanceState 涓?
      */
     public void beforeOnSaveInstanceState() {
         mActive = ReflectionUtils.on(mFragmentManager).get("mActive");
@@ -102,10 +102,10 @@ public class FragmentPluginHelper {
     }
 
     /**
-     * 待 onSaveInstanceState 执行完毕后，会恢复插件 Fragment
+     * 寰?onSaveInstanceState 鎵ц瀹屾瘯鍚庯紝浼氭仮澶嶆彃浠?Fragment
      */
     public void afterOnSaveInstanceState() {
-        // 不能直接恢复，post 是为了等到 Fragment#performSaveInstanceState 执行完毕
+        // 涓嶈兘鐩存帴鎭㈠锛宲ost 鏄负浜嗙瓑鍒?Fragment#performSaveInstanceState 鎵ц瀹屾瘯
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -116,3 +116,4 @@ public class FragmentPluginHelper {
         });
     }
 }
+

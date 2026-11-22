@@ -34,9 +34,9 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -48,16 +48,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 /**
- * 包装 Activity，重写必要的方法，其他方法交给 origin 处理
+ * 鍖呰 Activity锛岄噸鍐欏繀瑕佺殑鏂规硶锛屽叾浠栨柟娉曚氦缁?origin 澶勭悊
  * <p>
- * 考虑到会用在 Fragment 插件化中，所以继承自 FragmentActivity
+ * 鑰冭檻鍒颁細鐢ㄥ湪 Fragment 鎻掍欢鍖栦腑锛屾墍浠ョ户鎵胯嚜 FragmentActivity
  */
 public class ActivityWrapper extends FragmentActivity {
-    private String mPkgName;  // 插件包名
-    private PluginContextWrapper mPluginContext; // 插件Context
-    private Activity mOriginActivity; //原生的宿主Activity
+    private String mPkgName;  // 鎻掍欢鍖呭悕
+    private PluginContextWrapper mPluginContext; // 鎻掍欢Context
+    private Activity mOriginActivity; //鍘熺敓鐨勫涓籄ctivity
     /**
-     * 如果 mOriginActivity 是 FragmentActivity 则该值不为空且 FragmentActivity 调用可以用该对象代理
+     * 濡傛灉 mOriginActivity 鏄?FragmentActivity 鍒欒鍊间笉涓虹┖涓?FragmentActivity 璋冪敤鍙互鐢ㄨ瀵硅薄浠ｇ悊
      */
     private FragmentActivity mOriginFragmentActivity;
 
@@ -68,7 +68,7 @@ public class ActivityWrapper extends FragmentActivity {
         if (mOriginActivity instanceof FragmentActivity) {
             mOriginFragmentActivity = (FragmentActivity) mOriginActivity;
         }
-        // 将ActivityWrapper的mBase设置为插件的Context
+        // 灏咥ctivityWrapper鐨刴Base璁剧疆涓烘彃浠剁殑Context
         attachBaseContext(mPluginContext);
     }
 
@@ -227,10 +227,9 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
 
-    // 下面是重写的非 ContextWrapper 的 Activity 方法
-    // 负责将 activity 的相关逻辑委托给 mOriginActivity 处理
-    // 部分 final 方法无法重写，可能引发问题，待观察
-    // 来自代码自动生成
+    // 涓嬮潰鏄噸鍐欑殑闈?ContextWrapper 鐨?Activity 鏂规硶
+    // 璐熻矗灏?activity 鐨勭浉鍏抽€昏緫濮旀墭缁?mOriginActivity 澶勭悊
+    // 閮ㄥ垎 final 鏂规硶鏃犳硶閲嶅啓锛屽彲鑳藉紩鍙戦棶棰橈紝寰呰瀵?    // 鏉ヨ嚜浠ｇ爜鑷姩鐢熸垚
 
     @Override
     public android.app.ActionBar getActionBar() {
@@ -265,7 +264,7 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public android.arch.lifecycle.Lifecycle getLifecycle() {
+    public androidx.lifecycle.Lifecycle getLifecycle() {
         return mOriginFragmentActivity.getLifecycle();
     }
 
@@ -313,12 +312,12 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public android.support.v4.app.FragmentManager getSupportFragmentManager() {
+    public androidx.fragment.app.FragmentManager getSupportFragmentManager() {
         return mOriginFragmentActivity.getSupportFragmentManager();
     }
 
     @Override
-    public android.support.v4.app.LoaderManager getSupportLoaderManager() {
+    public androidx.loader.app.LoaderManager getSupportLoaderManager() {
         return mOriginFragmentActivity.getSupportLoaderManager();
     }
 
@@ -823,7 +822,7 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public void onAttachFragment(android.support.v4.app.Fragment fragment0) {
+    public void onAttachFragment(androidx.fragment.app.Fragment fragment0) {
         mOriginFragmentActivity.onAttachFragment(fragment0);
     }
 
@@ -1054,7 +1053,7 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public void setEnterSharedElementCallback(android.support.v4.app.SharedElementCallback sharedelementcallback0) {
+    public void setEnterSharedElementCallback(androidx.core.app.SharedElementCallback sharedelementcallback0) {
         mOriginFragmentActivity.setEnterSharedElementCallback(sharedelementcallback0);
     }
 
@@ -1065,7 +1064,7 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public void setExitSharedElementCallback(android.support.v4.app.SharedElementCallback sharedelementcallback0) {
+    public void setExitSharedElementCallback(androidx.core.app.SharedElementCallback sharedelementcallback0) {
         mOriginFragmentActivity.setExitSharedElementCallback(sharedelementcallback0);
     }
 
@@ -1147,12 +1146,12 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public void startActivityFromFragment(android.support.v4.app.Fragment fragment0, android.content.Intent intent1, int int2) {
+    public void startActivityFromFragment(androidx.fragment.app.Fragment fragment0, android.content.Intent intent1, int int2) {
         mOriginFragmentActivity.startActivityFromFragment(fragment0, intent1, int2);
     }
 
     @Override
-    public void startActivityFromFragment(android.support.v4.app.Fragment fragment0, android.content.Intent intent1, int int2, android.os.Bundle bundle3) {
+    public void startActivityFromFragment(androidx.fragment.app.Fragment fragment0, android.content.Intent intent1, int int2, android.os.Bundle bundle3) {
         mOriginFragmentActivity.startActivityFromFragment(fragment0, intent1, int2, bundle3);
     }
 
@@ -1180,7 +1179,7 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
     @Override
-    public void startIntentSenderFromFragment(android.support.v4.app.Fragment fragment0, android.content.IntentSender intentsender1, int int2, android.content.Intent intent3, int int4, int int5, int int6, android.os.Bundle bundle7) throws IntentSender.SendIntentException {
+    public void startIntentSenderFromFragment(androidx.fragment.app.Fragment fragment0, android.content.IntentSender intentsender1, int int2, android.content.Intent intent3, int int4, int int5, int int6, android.os.Bundle bundle7) throws IntentSender.SendIntentException {
         mOriginFragmentActivity.startIntentSenderFromFragment(fragment0, intentsender1, int2, intent3, int4, int5, int6, bundle7);
     }
 
@@ -1265,3 +1264,4 @@ public class ActivityWrapper extends FragmentActivity {
     }
 
 }
+

@@ -4,7 +4,7 @@ import com.qiyi.plugin.utils.Utils
 apply plugin: 'com.android.application'
 
 apply plugin: 'com.qiyi.neptune.plugin'
-// 宿主使用，固定资源id
+// ??????????????d
 neptune {
     pluginMode = false
     packageId = 0x7f
@@ -12,15 +12,16 @@ neptune {
 
 
 android {
+    namespace 'com.iqiyi.host.sample'
     compileSdkVersion COMPILE_SDK_VERSION
     buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "com.iqiyi.host.sample"
-        minSdkVersion 14
+        minSdk 14
         targetSdkVersion TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dexOptions {
         //preDexLibraries false
@@ -31,6 +32,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    
     }
 
     sourceSets {
@@ -43,7 +45,7 @@ android {
 
         def fileName = defaultConfig.applicationId + ".apk"
         variant.outputs.each { output ->
-            // 修改apk名称
+            // ???apk???
             //def fileName = defaultConfig.applicationId + "-" + defaultConfig.versionName + "-" + variant.buildType.name + ".apk"
             boolean highAGP = Utils.compareVersion(Version.ANDROID_GRADLE_PLUGIN_VERSION, "3.0.0") >= 0
             if (highAGP) {
@@ -72,3 +74,7 @@ dependencies {
     //implementation project(":SdkLibrary")
     implementation "org.qiyi.video:neptune:2.5.0"
 }
+
+
+
+

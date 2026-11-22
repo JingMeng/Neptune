@@ -5,12 +5,11 @@ import com.android.build.gradle.tasks.ProcessAndroidResources
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdk 14
+        targetSdk 34
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -21,6 +20,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    
     }
 
     sourceSets {
@@ -38,7 +38,7 @@ android {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 // Upload to Maven
@@ -49,7 +49,7 @@ apply from: 'bintray_upload.gradle'
 import com.android.builder.model.Version
 
 def isHigherAGP = compareVersion(Version.ANDROID_GRADLE_PLUGIN_VERSION, "3.0.0") >= 0
-// 打公共资源aar，必须使用AGP 2.3.3版本，否则生成的aar中R.txt文件资源id与public.xml会不相同
+// ????????ar????????GP 2.3.3????????????aar??.txt??????id??ublic.xml??????
 // TODO fix me
 afterEvaluate {
 
@@ -57,7 +57,7 @@ afterEvaluate {
         def scope = variant.getVariantData().getScope()
         String mergeTaskName = "package${variant.name.capitalize()}Resources"
         MergeResources mergeResTask = project.tasks.getByName(mergeTaskName) as MergeResources
-        // 拷贝public.xml
+        // ???public.xml
         mergeResTask.doLast {
             copy {
                 int i = 0
@@ -166,3 +166,5 @@ public static int compareVersion(String v1, String v2) {
 
     return (diff != 0) ? diff : va1.length - va2.length
 }
+
+

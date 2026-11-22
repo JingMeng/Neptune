@@ -17,7 +17,7 @@
  */
 package org.qiyi.pluginlibrary.component.wraper;
 
-import android.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;

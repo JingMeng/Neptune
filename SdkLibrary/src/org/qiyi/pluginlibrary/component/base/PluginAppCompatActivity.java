@@ -21,8 +21,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import org.qiyi.pluginlibrary.utils.ComponentFinder;
@@ -66,18 +66,18 @@ public class PluginAppCompatActivity extends AppCompatActivity implements IPlugi
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
-        // 替换成坑位Activity
+        // 鏇挎崲鎴愬潙浣岮ctivity
         String pkgName = getPluginPackageName();
         intent = ComponentFinder.switchToActivityProxy(pkgName, intent, requestCode, this);
 
         super.startActivityForResult(intent, requestCode);
     }
 
-    // Api 16新增
+    // Api 16鏂板
     @Override
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
-        // 替换成坑位Activity
+        // 鏇挎崲鎴愬潙浣岮ctivity
         String pkgName = getPluginPackageName();
         intent = ComponentFinder.switchToActivityProxy(pkgName, intent, requestCode, this);
 
@@ -86,7 +86,7 @@ public class PluginAppCompatActivity extends AppCompatActivity implements IPlugi
 
 
     ////////////////////////////////////////////////////////////////////
-    // 以下是IPluginBase接口实现
+    // 浠ヤ笅鏄疘PluginBase鎺ュ彛瀹炵幇
     ///////////////////////////////////////////////////////////////////
 
     @Override
@@ -98,3 +98,4 @@ public class PluginAppCompatActivity extends AppCompatActivity implements IPlugi
         return pkgName;
     }
 }
+

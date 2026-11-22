@@ -17,11 +17,11 @@
  */
 package org.qiyi.pluginlibrary.component;
 
-import android.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +31,16 @@ import org.qiyi.pluginlibrary.constant.IntentConstant;
 import org.qiyi.pluginlibrary.utils.ErrorUtil;
 
 /**
- * 工厂类，负责创建 FragmentProxy，根据 Neptune 配置，决定具体的 FragmentProxy 类型
+ * 宸ュ巶绫伙紝璐熻矗鍒涘缓 FragmentProxy锛屾牴鎹?Neptune 閰嶇疆锛屽喅瀹氬叿浣撶殑 FragmentProxy 绫诲瀷
  */
 public class FragmentProxyFactory {
 
     /**
-     * 根据 packageName 与 classname 创建 FragmentProxy
+     * 鏍规嵁 packageName 涓?classname 鍒涘缓 FragmentProxy
      *
-     * @param proxyClass  FragmentProxy 具体类型
-     * @param packageName 插件包名
-     * @param className   插件 Fragment 类名
+     * @param proxyClass  FragmentProxy 鍏蜂綋绫诲瀷
+     * @param packageName 鎻掍欢鍖呭悕
+     * @param className   鎻掍欢 Fragment 绫诲悕
      * @return FragmentProxy
      */
     @NonNull
@@ -64,7 +64,7 @@ public class FragmentProxyFactory {
     }
 
     /**
-     * 默认的 FragmentProxy，一般接入方在有定制 UI 需求，需要自己继承 AbstractFragmentProxy 实现
+     * 榛樿鐨?FragmentProxy锛屼竴鑸帴鍏ユ柟鍦ㄦ湁瀹氬埗 UI 闇€姹傦紝闇€瑕佽嚜宸辩户鎵?AbstractFragmentProxy 瀹炵幇
      */
     public static class DefaultFragmentProxy extends AbstractFragmentProxy {
         private View loadingView;
@@ -92,3 +92,4 @@ public class FragmentProxyFactory {
         }
     }
 }
+

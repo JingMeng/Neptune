@@ -23,15 +23,16 @@ def getDate() {
 }
 
 android {
+    namespace 'com.iqiyi.plugin.sample'
     compileSdkVersion COMPILE_SDK_VERSION
     buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "com.iqiyi.plugin.sample"
-        minSdkVersion 14
+        minSdk 14
         targetSdkVersion TARGET_SDK_VERSION
         versionCode 2
         versionName "1.2"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dexOptions {
         //preDexLibraries false
@@ -39,7 +40,8 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "TIME", "\"${getDate()}\""
+            buildConfigField "String", "TIME", "\"${getDate()}
+    \""
         }
         release {
             minifyEnabled true
@@ -58,7 +60,7 @@ android {
         def fileName = defaultConfig.applicationId + ".apk"
         boolean highAGP = Utils.compareVersion(Version.ANDROID_GRADLE_PLUGIN_VERSION, "3.0.0") >= 0
         variant.outputs.each { output ->
-            // 修改apk名称
+            // ???apk???
             //def fileName = defaultConfig.applicationId + "-" + defaultConfig.versionName + "-" + variant.buildType.name + ".apk"
             if (highAGP) {
                 output.outputFileName = fileName
@@ -107,4 +109,8 @@ dependencies {
         implementation "com.airbnb.android:lottie:${LOTTIE_VERSION}"
     }
 }
+
+
+
+
 

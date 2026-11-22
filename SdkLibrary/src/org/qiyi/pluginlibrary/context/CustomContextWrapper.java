@@ -84,7 +84,7 @@ public abstract class CustomContextWrapper extends ContextWrapper implements Int
     }
 
     private static void setFilePermissionsForDb(String dbPath, int perms) {
-        android.os.FileUtils.setPermissions(dbPath, perms, -1, -1);
+        try { android.system.Os.chmod(dbPath, perms); } catch (android.system.ErrnoException e) { throw new SecurityException(e); }
     }
 
     private static File makeBackupFile(File prefsFile) {
@@ -330,9 +330,9 @@ public abstract class CustomContextWrapper extends ContextWrapper implements Int
                 tmpDir.mkdirs();
             }
             if (tmpDir.exists() && VersionUtils.hasOreo_MR1()) {
-                int perms = android.os.FileUtils.S_IRUSR | android.os.FileUtils.S_IWUSR | android.os.FileUtils.S_IXUSR
-                        | android.os.FileUtils.S_IRGRP | android.os.FileUtils.S_IWGRP | android.os.FileUtils.S_IXGRP
-                        | android.os.FileUtils.S_IXOTH;
+                int perms = 0400 | 0200 | 0100
+                        | 0040 | 0020 | 0010
+                        | 0001;
                 setFilePermissionsForDb(tmpDir.getAbsolutePath(), perms);
 
             }
@@ -342,7 +342,7 @@ public abstract class CustomContextWrapper extends ContextWrapper implements Int
                     if (!f.exists()) {
                         f.createNewFile();
                     }
-                    int perms = android.os.FileUtils.S_IRUSR | android.os.FileUtils.S_IWUSR | android.os.FileUtils.S_IRGRP | android.os.FileUtils.S_IWGRP;
+                    int perms = 0400 | 0200 | 0040 | 0020;
                     setFilePermissionsForDb(f.getAbsolutePath(), perms);
                 } catch (IOException | SecurityException e) {
                     // ignore

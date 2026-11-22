@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import org.qiyi.pluginlibrary.utils.ComponentFinder;
@@ -43,7 +43,7 @@ public class PluginActivityGroup extends ActivityGroup implements IPluginBase {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        // 替换插件的BaseContext
+        // 鏇挎崲鎻掍欢鐨凚aseContext
         mDelegate = new PluginActivityDelegate();
         newBase = mDelegate.createActivityContext(this, newBase);
 
@@ -78,18 +78,18 @@ public class PluginActivityGroup extends ActivityGroup implements IPluginBase {
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
-        // 替换成坑位Activity
+        // 鏇挎崲鎴愬潙浣岮ctivity
         String pkgName = getPluginPackageName();
         intent = ComponentFinder.switchToActivityProxy(pkgName, intent, requestCode, this);
 
         super.startActivityForResult(intent, requestCode);
     }
 
-    // Api 16新增
+    // Api 16鏂板
     @Override
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
-        // 替换成坑位Activity
+        // 鏇挎崲鎴愬潙浣岮ctivity
         String pkgName = getPluginPackageName();
         intent = ComponentFinder.switchToActivityProxy(pkgName, intent, requestCode, this);
 
@@ -97,7 +97,7 @@ public class PluginActivityGroup extends ActivityGroup implements IPluginBase {
     }
 
     ////////////////////////////////////////////////////////////////////
-    // 以下是IPluginBase接口实现
+    // 浠ヤ笅鏄疘PluginBase鎺ュ彛瀹炵幇
     ///////////////////////////////////////////////////////////////////
     @Override
     public String getPluginPackageName() {
@@ -108,3 +108,4 @@ public class PluginActivityGroup extends ActivityGroup implements IPluginBase {
         return pkgName;
     }
 }
+

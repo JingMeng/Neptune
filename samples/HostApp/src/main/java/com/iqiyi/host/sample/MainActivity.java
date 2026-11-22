@@ -1,4 +1,4 @@
-package com.iqiyi.host.sample;
+﻿package com.iqiyi.host.sample;
 
 import android.Manifest;
 import android.content.ComponentName;
@@ -7,10 +7,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void updatePluginState() {
         boolean installed = Neptune.isPackageInstalled(this, SAMPLE_PLUGIN_PKG);
-        pluginState.setText(getString(R.string.plugin_state, installed ? "已安装" : "未安装"));
+        pluginState.setText(getString(R.string.plugin_state, installed ? "宸插畨瑁? : "鏈畨瑁?));
     }
 
     /**
-     * 安装插件
+     * 瀹夎鎻掍欢
      */
     @OnClick(R.id.install_plugin) void installPlugin() {
 
@@ -124,12 +124,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 启动插件
+     * 鍚姩鎻掍欢
      */
     @OnClick(R.id.launch_plugin) void launchPlugin() {
 
         Intent intent = new Intent();
-        ComponentName cn = new ComponentName(SAMPLE_PLUGIN_PKG, "");  // 启动默认入口Activity
+        ComponentName cn = new ComponentName(SAMPLE_PLUGIN_PKG, "");  // 鍚姩榛樿鍏ュ彛Activity
         intent.setComponent(cn);
         if (Neptune.isPackageInstalled(this, SAMPLE_PLUGIN_PKG)) {
             Neptune.launchPlugin(this, intent);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 卸载插件
+     * 鍗歌浇鎻掍欢
      */
     @OnClick(R.id.uninstall_plugin) void uninstallPlugin() {
         Neptune.uninstall(this, SAMPLE_PLUGIN_PKG, new IPluginUninstallCallBack.Stub() {
@@ -151,3 +151,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+

@@ -22,15 +22,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import org.qiyi.pluginlibrary.utils.ComponentFinder;
 import org.qiyi.pluginlibrary.utils.ContextUtils;
 
 /**
- * 插件内的BaseActivity, 提供给插件方继承此类，
- * 通过override方式来完成插件框架的一些功能替换和生命周期注入
+ * 鎻掍欢鍐呯殑BaseActivity, 鎻愪緵缁欐彃浠舵柟缁ф壙姝ょ被锛? * 閫氳繃override鏂瑰紡鏉ュ畬鎴愭彃浠舵鏋剁殑涓€浜涘姛鑳芥浛鎹㈠拰鐢熷懡鍛ㄦ湡娉ㄥ叆
  */
 public class PluginActivity extends Activity implements IPluginBase {
 
@@ -38,7 +37,7 @@ public class PluginActivity extends Activity implements IPluginBase {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        // 替换插件的BaseContext
+        // 鏇挎崲鎻掍欢鐨凚aseContext
         mDelegate = new PluginActivityDelegate();
         newBase = mDelegate.createActivityContext(this, newBase);
 
@@ -73,18 +72,18 @@ public class PluginActivity extends Activity implements IPluginBase {
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
-        // 替换成坑位Activity
+        // 鏇挎崲鎴愬潙浣岮ctivity
         String pkgName = getPluginPackageName();
         intent = ComponentFinder.switchToActivityProxy(pkgName, intent, requestCode, this);
 
         super.startActivityForResult(intent, requestCode);
     }
 
-    // Api 16新增
+    // Api 16鏂板
     @Override
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
-        // 替换成坑位Activity
+        // 鏇挎崲鎴愬潙浣岮ctivity
         String pkgName = getPluginPackageName();
         intent = ComponentFinder.switchToActivityProxy(pkgName, intent, requestCode, this);
 
@@ -92,7 +91,7 @@ public class PluginActivity extends Activity implements IPluginBase {
     }
 
     ////////////////////////////////////////////////////////////////////
-    // 以下是IPluginBase接口实现
+    // 浠ヤ笅鏄疘PluginBase鎺ュ彛瀹炵幇
     ///////////////////////////////////////////////////////////////////
     @Override
     public String getPluginPackageName() {
@@ -103,3 +102,4 @@ public class PluginActivity extends Activity implements IPluginBase {
         return pkgName;
     }
 }
+

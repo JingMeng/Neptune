@@ -19,9 +19,9 @@ package org.qiyi.pluginlibrary.component;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +34,7 @@ import org.qiyi.pluginlibrary.runtime.PluginManager;
 import org.qiyi.pluginlibrary.utils.FragmentPluginHelper;
 
 /**
- * 代理加载插件 Fragment 过程，这样宿主可以不需要关心 Fragment 的异步加载逻辑
+ * 浠ｇ悊鍔犺浇鎻掍欢 Fragment 杩囩▼锛岃繖鏍峰涓诲彲浠ヤ笉闇€瑕佸叧蹇?Fragment 鐨勫紓姝ュ姞杞介€昏緫
  */
 public abstract class AbstractFragmentProxy extends Fragment {
     private FragmentPluginHelper mPluginHelper;
@@ -110,3 +110,4 @@ public abstract class AbstractFragmentProxy extends Fragment {
         }
     }
 }
+
